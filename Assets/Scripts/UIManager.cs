@@ -1,20 +1,21 @@
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject endGamePanel;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public TMP_Text tempoFinalText;
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (GameController.gameOver)
-        { 
+        if (!GameController.gameOver)
+        {
+            GameTimer.UpdateTimer();
+        }
+        else
+        {
             endGamePanel.SetActive(true);
+            tempoFinalText.text = "Tempo: " + GameTimer.elapsedTime.ToString("F2") + "s";
         }
     }
 }
